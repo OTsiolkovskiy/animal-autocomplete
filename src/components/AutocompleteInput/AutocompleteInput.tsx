@@ -48,7 +48,7 @@ export const AutocompleteInput: React.FC<Props> = ({ animals, inputValue, setInp
         <span 
           className="arrow" 
           onClick={() => {
-            setInputValue('');
+            // setInputValue('');
             setShowList(!showList);
           }}
         >
