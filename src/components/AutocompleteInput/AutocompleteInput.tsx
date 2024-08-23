@@ -15,8 +15,14 @@ export const AutocompleteInput: React.FC<Props> = ({ animals, inputValue, setInp
   const filteredAnimals = animals.filter(animal => animal.toLowerCase().startsWith(inputValue.toLowerCase()));
 
   const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    setShowList(true);
+    const value = event.target.value;
+    setInputValue(value);
+
+    if (value.trim() === '') {
+      setShowList(false);
+    } else {
+      setShowList(true);
+    }
   }
 
   const handleChooseAnimal = (animal: string) => {
@@ -42,13 +48,12 @@ export const AutocompleteInput: React.FC<Props> = ({ animals, inputValue, setInp
         <input className="input"
           type="text" 
           aria-placeholder="Search animal" 
-          value={inputValue}
+          value={inputValue.trim()}
           onChange={handleInputValue}
           />
         <span 
           className="arrow" 
           onClick={() => {
-            // setInputValue('');
             setShowList(!showList);
           }}
         >
@@ -68,7 +73,6 @@ export const AutocompleteInput: React.FC<Props> = ({ animals, inputValue, setInp
             <li>No matches found</li>
           )}
         </ul>}
-
       </div>
   )
 }
